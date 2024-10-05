@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clue Reveal Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet"> <!-- Fun font -->
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif; /* Changed font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            text-align: center;
+            overflow: hidden; /* Prevent scrollbars from appearing during animation */
+        }
+        #loginForm {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            font-size: 18px; /* Increased font size */
+        }
+        button {
+            padding: 10px;
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px; /* Increased font size */
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff3b30;
+        }
+        #messageBox {
+            display: none; /* Hidden by default */
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            resize: none;
+            font-size: 18px; /* Increased font size */
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginForm">
+    <h1>Clue Login</h1>
+    <input type="text" id="rollNo" placeholder="Enter your roll number" required>
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="messageBox">
+    <h2>Your clue is...</h2>
+    <textarea id="clue" rows="4" placeholder="Your clue will appear here..." readonly></textarea>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/confetti-js/0.0.22/confetti.browser.min.js"></script> <!-- Confetti library -->
+<script>
+    const clues = {
+        "1240500186": "Someone picking wild flowers with a hair bow on? Oh yeah, that's me!",
+        "1240500187": "The Social butterfly",
+        "1240500188": "Influencer",
+        "1240500189": "You will never find me in the class 😂",
+        "1240500190": "The weather up here is very nice",
+        "1240500191": "I'm Lee from Rush Hour",
+        "1240500192": "Get me a corn bouquet, we'll go for a date",
+        "1240500193": "Probably napping",
+        "1240500194": "Introvert from outside, extrovert from inside ;)",
+        "1240500195": "A passionate traveler with love for slow pace of life and nilofer chai",
+        "1240500196": "I'll charm you in five languages before you finish your drink",
+        "1240500197": "Always on the move, never lost in the crowd, Chasing every thrill, her spirit is loud.",
+        "1240500198": "Oh you're unlucky! there are 2 people you have to find! the first clue is 1. With eyes that need clarity, my hair does all the talking. and the second is 2. I vanish on weekends",
+        "1240500199": "To cherish the grace of fallen angels, I offer them flowers (aka The Flirting Queen!)",
+        "1240500200": "The wise old one",
+        "1240500201": "I'm Carter from Rush Hour",
+        "1240500202": "I'm a huge Garba fan",
+        "1240500203": "I'm always tripping, but not on drugs.",
+        "1240500204": "You will always find me in the basketball court",
+        "1240500205": "Globetrotter with stamps from Bali, Abu Dhabi, Dubai, and Thailand",
+        "1240500206": "I love dogs but I behave like a cat and I loveeeeeeee bluee."
+    };
+
+    function login() {
+        const rollNo = document.getElementById("rollNo").value;
+        const clue = clues[rollNo];
+
+        if (clue) {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("messageBox").style.display = "block";
+            document.getElementById("clue").value = clue;
+
+            // Confetti Animation
+            const confetti = new ConfettiGenerator({
+                target: 'my-canvas',
+                max: 100,
+                size: 1,
+                animate: true,
+                props: ['circle', 'square', 'triangle', 'line'],
+                colors: [[165, 104, 244], [63, 81, 181], [255, 82, 82], [255, 193, 7]],
+                clock: 25,
+                rotate: true,
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+            confetti.render();
+        } else {
+            alert("Invalid roll number. Please try again.");
+        }
+    }
+</script>
+
+<!-- Canvas for Confetti -->
+<canvas id="my-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+
+</body>
+</html>
